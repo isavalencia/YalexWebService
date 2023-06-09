@@ -1,0 +1,31 @@
+﻿@model List<AyalexJson.Models.cliente>
+@{
+    ViewBag.Title = "Index";
+}
+
+<input onclick="Obten();" type="button" value="Obtener" />
+<div id="MiDiv">
+
+
+</div>
+
+<script>
+    function Obten() {
+        fetch("@Url.Content("~/JCliente/ObtenerCli")")
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (miJson) {
+                console.log(miJson);
+                let miResultado = miJson;
+
+                for (let i = 0; i < miJson.length; i++) {
+                    miResultado += "<p>" + miJson[i].nombres+"<p>"
+                }
+
+        document.getElementById("MiDiv").innerHTML = miJson;
+            })
+        
+    }
+</script>
+
